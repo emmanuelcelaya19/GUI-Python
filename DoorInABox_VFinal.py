@@ -26,7 +26,7 @@ precenceDoorLeft = True   #Variable for graphic button updates
 TestDoor_exit_flag = False #Variable for control TestDoor Stop execution
 TestMotion_exit_flag = False #Variable for control TestMotion Stop execution
 TestOptical_exit_flag = False #Variable for control TestOptical Stop execution
-fileName = 'DoorInABoxConfig.cfg'  #config Name
+fileName = ''  #config Name
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
 threads = []                        #Async execution (threads) array
 
@@ -91,8 +91,8 @@ layoutManual =  [ #Layout for manual window
 
 # Global Variables for Layouts elements information and sizes
 sizeFrame=(245,358)
-Combovalues = ['min','sec']
-sizeCombo = (3, 2)
+Combovalues = ['sec','min','hrs']
+sizeCombo = (3, 5)
 sizeInput = (7,5)
 col1 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_DOOR_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...', key = '-TXT_CYCLES_DOOR_TEST-')],
@@ -171,9 +171,10 @@ def main():
     windowAutomatic.Maximize()
     windowManual = None
     fileName = LoadConfigFile("Select Config File")
-    if(fileName!=None):
+    if fileName!='()':
         FillParameters(fileName,windowAutomatic)
-
+    else:
+        fileName = 'DoorInABoxConfig.cfg'  #config Name
 
     while True:             # Event Loop
         try:
@@ -200,7 +201,7 @@ def main():
 
             elif event== 'CONFIG FILE':  #upload config files
                 fileName = LoadConfigFile("Select Config File")
-                if(fileName!=None):
+                if fileName!='()':
                     FillParameters(fileName,windowAutomatic)
 
             elif event== 'ABOUT...':  #About this application event
@@ -605,7 +606,7 @@ def GetTestValues(Button,Data):
 
     for Result in DataValues:
             print(Result)
-            if Result !='sec' and Result !='min':
+            if Result !='sec' and Result !='min' and Result !='hrs':
                 try:
                     Result = int(Result)
                     if(Result<1):
@@ -622,7 +623,9 @@ def GetTestValues(Button,Data):
         units = DataValues[1]
         if(units == 'min'):
             value = value*60
-            
+        elif units == 'hrs':
+            value = value*60*60
+
         TestData.append(value)
         
         value = int(DataValues[2])
@@ -630,7 +633,8 @@ def GetTestValues(Button,Data):
 
         if(units == 'min'):
             value = value*60
-            
+        elif units == 'hrs':
+            value = value*60*60    
         TestData.append(value)
 
         value = int(DataValues[4])
@@ -641,7 +645,8 @@ def GetTestValues(Button,Data):
         units = DataValues[6]
         if(units == 'min'):
             value = value*60
-            
+        elif units == 'hrs':
+            value = value*60*60    
         TestData.append(value)
         
         value = int(DataValues[7])
@@ -649,7 +654,8 @@ def GetTestValues(Button,Data):
 
         if(units == 'min'):
             value = value*60
-            
+        elif units == 'hrs':
+            value = value*60*60    
         TestData.append(value)
 
         value = int(DataValues[9])
@@ -672,30 +678,40 @@ def GetTestValues(Button,Data):
         units = DataValues[15]
         if(units == 'min'):
             value = value*60
+        elif units == 'hrs':
+            value = value*60*60
         TestData.append(value)
 
         value = int(DataValues[16])
         units = DataValues[17]
         if(units == 'min'):
             value = value*60
+        elif units == 'hrs':
+            value = value*60*60
         TestData.append(value)
 
         value = int(DataValues[18])
         units = DataValues[19]
         if(units == 'min'):
             value = value*60
+        elif units == 'hrs':
+            value = value*60*60
         TestData.append(value)
 
         value = int(DataValues[20])
         units = DataValues[21]
         if(units == 'min'):
             value = value*60
+        elif units == 'hrs':
+            value = value*60*60
         TestData.append(value)
 
         value = int(DataValues[22])
         units = DataValues[23]
         if(units == 'min'):
             value = value*60
+        elif units == 'hrs':
+            value = value*60*60
         TestData.append(value)
 
         value = int(DataValues[24])
@@ -810,9 +826,10 @@ def LoadConfigFile(msj):
     history = True,
     show_hidden = True,
     history_setting_filename = None)
-
+    print('file Name')
     print(ConfigFileName)
-    return ConfigFileName
+    print('file Name')
+    return str(ConfigFileName)
 #-----------------------------------------------------------------------------------------------------
 #--------------------//Load File Parameters Popout//-------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------
@@ -930,7 +947,7 @@ def SaveParameters(fileName,Data):
 
         for Result in DataValues:
             print(Result)
-            if Result !='sec' and Result !='min':
+            if Result !='sec' and Result !='min' and Result!='hrs':
                 try:
                     Result = int(Result)
                     if(Result<1):
