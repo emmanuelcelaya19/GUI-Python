@@ -98,8 +98,8 @@ col1 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_DOOR_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...', key = '-TXT_CYCLES_DOOR_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
-        [sg.Text('Time Open:',key = '-TXT_OPEN-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_OPEN-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_OPEN-', default_value = 'seg',size = sizeCombo,readonly = True)],
-        [sg.Text('Time Closed:',key = '-TXT_CLOSED-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_CLOSED-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_CLOSED-', default_value = 'seg',size = sizeCombo, readonly = True)],
+        [sg.Text('Time Open:',key = '-TXT_OPEN-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_OPEN-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_OPEN-', default_value = 'sec',size = sizeCombo,readonly = True)],
+        [sg.Text('Time Closed:',key = '-TXT_CLOSED-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_CLOSED-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_CLOSED-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Total Cycles:     '),sg.Input(default_text = "",key = '-CYCLES_DOOR_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Push()],
         ]
 
@@ -107,8 +107,8 @@ col2 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_MOTION_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_MOTION_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
-        [sg.Text('Cycle Time:   ',key = '-TXT_CYCLE-'),sg.Push(),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'seg',size = sizeCombo, readonly = True)],
-        [sg.Text('Motion Time: ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'seg',size = sizeCombo, readonly = True)],
+        [sg.Text('Cycle Time:   ',key = '-TXT_CYCLE-'),sg.Push(),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Motion Time: ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Total Cycles:     '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
@@ -118,11 +118,11 @@ col3 = [
         [sg.Text('Dawn Level:      ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Day Level:         ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_GHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Dusk Level:       ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Rate Change:',key = 'RATE'),sg.Push(),sg.Input(default_text = "",key = '-RATE_CHANGUE_NIGHT_DAY-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_RATE_CHANGE-', default_value = 'seg',size = sizeCombo, readonly = True)],
-        [sg.Text('Night Time:'),sg.Push(),sg.Input(default_text = "",key = '-NIGHT_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_NIGHT_TIME-', default_value = 'seg',size = sizeCombo, readonly = True)],
-        [sg.Text('Dawn Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAWN_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DAWN_TIME-', default_value = 'seg',size = sizeCombo, readonly = True)],
-        [sg.Text('Day Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAY_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DAY_TIME-',default_value = 'seg',size = sizeCombo, readonly = True)],
-        [sg.Text('Dusk Time:'),sg.Push(),sg.Input(default_text = "",key = '-DUSK_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DUSK_TIME-',default_value = 'seg',size = sizeCombo, readonly = True)],
+        [sg.Text('Rate Change:',key = 'RATE'),sg.Push(),sg.Input(default_text = "",key = '-RATE_CHANGUE_NIGHT_DAY-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_RATE_CHANGE-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Night Time:'),sg.Push(),sg.Input(default_text = "",key = '-NIGHT_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_NIGHT_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Dawn Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAWN_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DAWN_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Day Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAY_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DAY_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Dusk Time:'),sg.Push(),sg.Input(default_text = "",key = '-DUSK_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DUSK_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Total Cycles:      '),sg.Input(default_text = "",key = '-CYCLES_OPTICAL_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
@@ -170,10 +170,9 @@ def main():
     windowAutomatic = sg.Window('Door in a Box - Automatic Mode', layoutAutomatic, size=(800, 390), finalize = True,resizable=True, location=(0,0))
     windowAutomatic.Maximize()
     windowManual = None
-    ConfigReader.read(fileName)
-    FillParameters(fileName,windowAutomatic)
-
-
+    fileName = LoadConfigFile("Select Config File")
+    if(fileName!=None):
+        FillParameters(fileName,windowAutomatic)
 
 
     while True:             # Event Loop
@@ -606,7 +605,7 @@ def GetTestValues(Button,Data):
 
     for Result in DataValues:
             print(Result)
-            if Result !='seg' and Result !='min':
+            if Result !='sec' and Result !='min':
                 try:
                     Result = int(Result)
                     if(Result<1):
@@ -920,7 +919,7 @@ def FillParameters(fileName,Workingwindow):
 #-----------------------------------------------------------------------------------------------------
 def SaveParameters(fileName,Data):
 
-    Save = sg.popup_ok_cancel('Save?')
+    Save = sg.popup_ok_cancel('Save in: ' + fileName)
     if(Save=='OK'):
         DataValues = [] 
         for Dato in Data:
@@ -931,7 +930,7 @@ def SaveParameters(fileName,Data):
 
         for Result in DataValues:
             print(Result)
-            if Result !='seg' and Result !='min':
+            if Result !='sec' and Result !='min':
                 try:
                     Result = int(Result)
                     if(Result<1):
