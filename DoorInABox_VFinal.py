@@ -31,6 +31,9 @@ LogFileCreation = True
 fileName = ''  #config Name
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
 threads = []                        #Async execution (threads) array
+DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
+MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
+OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
 
 GPIO.setmode(GPIO.BCM) #BCM pin out mode for Raspberry pi (PWM Control)
 GPIO.setwarnings(False) # Disable GPIO Warings (PinOut use/re-use)
@@ -169,6 +172,9 @@ def main():
     global TestDoor_exit_flag
     global TestMotion_exit_flag
     global TestOptical_exit_flag
+    global DoorTestLog
+    global MotionTestLog
+    global OpticalTestLog
 
 #Window Initialization    
 
@@ -188,21 +194,24 @@ def main():
                 disableBtn(False,windowAutomatic)
                 disabled = False
                 if LogFileCreation and TestStarted:
-                    print('se guarda el log')
-                    file.write("Primera línea" + os.linesep)
-                    file.write("Segunda línea")
-                    file.close()
                     TestStarted = False
+                    LogName = "/home/masoniteuser/Desktop/DoorInABoox/Logs/Log " + LogtimeName + ".txt"
+                    file = open(LogName, "w")
+                    file.write(DoorTestLog + MotionTestLog + OpticalTestLog)
+                    file.close()
+                    DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
+                    MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
+                    OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
+                    
             else:
                 if(disabled == False):
                     disableBtn(True,windowAutomatic)
                     disabled = True
                     TestStarted = True
-                    print('se inicia el log')
-                    Logtime = ctime()
-                    Logtime = Logtime.replace(':','_')
-                    LogName = "/home/masoniteuser/Desktop/DoorInABoox/Logs/Log " + Logtime + ".txt"
-                    file = open(LogName, "w")
+                    if LogFileCreation:
+                        Logtime = ctime()
+                        LogtimeName = Logtime.replace(':','_')
+                        
 
 
             event, values = windowAutomatic.read(timeout=0) #Window events Reading process / Timeout = 0 for real time window updates
@@ -387,10 +396,14 @@ def UpdateValuesOpticalTest(EventData,windowAutomatic):
 #-----------------------------------------------------------------------------------------------------
 def StepsDoorTest(DataForTest,windowAutomatic):
     global TestDoor_exit_flag
+
+    global DoorTestLog
     Step = 1
     CycleOnProcess = False
     TimeOpen = int(DataForTest[0])
     TimeClosed = int(DataForTest[1])
+    Logtime = ctime()
+    DoorTestLog = DoorTestLog + 'Test Started at: ' + Logtime + '\n\n'
 
     
     
@@ -399,6 +412,7 @@ def StepsDoorTest(DataForTest,windowAutomatic):
         CountingString = 'Cycles: ' + str(num) + ' of ' +  str(DataForTest[2]) + ' Total'
         windowAutomatic.write_event_value('-UPDATE_VALUES_DOOR_TEST-', CountingString)
         CycleOnProcess = True
+        DoorTestLog = DoorTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
         actualStep = 0
         InitialTime = time.time()
@@ -408,6 +422,8 @@ def StepsDoorTest(DataForTest,windowAutomatic):
             if(Step == 1):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    DoorTestLog = DoorTestLog + 'Door Open: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_DOOR_TEST-', 'OPEN')
                     ServoMotor.ChangeDutyCycle(12.5)
                 ActualTime = time.time()
@@ -417,6 +433,8 @@ def StepsDoorTest(DataForTest,windowAutomatic):
             elif(Step == 2):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    DoorTestLog = DoorTestLog + 'Door Closed: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_DOOR_TEST-', 'CLOSED')
                     ServoMotor.ChangeDutyCycle(5)
                 ActualTime = time.time()
@@ -426,9 +444,13 @@ def StepsDoorTest(DataForTest,windowAutomatic):
             elif(Step == 3):
                   CycleOnProcess = False
             if TestDoor_exit_flag == True:
+                Logtime = ctime()
+                DoorTestLog = DoorTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
                 
     windowAutomatic.write_event_value('-STARTBTN_DOOR_TEST-','TEST_DONE')
+    Logtime = ctime()
+    DoorTestLog = DoorTestLog + '\nTest Ended at: ' + Logtime + '\n\n'
     return
 
 
