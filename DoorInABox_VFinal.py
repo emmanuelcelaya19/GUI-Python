@@ -114,7 +114,7 @@ col2 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_MOTION_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_MOTION_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
-        [sg.Text('Cycle Time:   ',key = '-TXT_CYCLE-'),sg.Push(),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('No Motion Time:',key = '-TXT_NO_MOTION-'),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Motion Time: ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Total Cycles:     '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
@@ -176,10 +176,11 @@ def main():
     global MotionTestLog
     global OpticalTestLog
 
+
 #Window Initialization    
 
     windowAutomatic = sg.Window('Door in a Box - Automatic Mode', layoutAutomatic, size=(800, 390), finalize = True,resizable=True, location=(0,0))
-    #windowAutomatic.Maximize()
+    windowAutomatic.Maximize()
     windowManual = None
     TestStarted = False
     fileName = LoadConfigFile("Select Config File")
@@ -281,7 +282,7 @@ def main():
                 else:
                     TestMotion_exit_flag = True
                     windowAutomatic[event].update(image_data=startbtn)
-                    windowAutomatic['-TXT_CYCLE-'].update(background_color = 'white')
+                    windowAutomatic['-TXT_NO_MOTION-'].update(background_color = 'white')
                     windowAutomatic['-TXT_MOTION-'].update(background_color = 'white')
                     MotionTest = False
             
@@ -303,8 +304,8 @@ def main():
                     windowAutomatic['RATE'].update(background_color = 'white')
                     OpticalTest = False
   
-        except NameError:
-            sg.popup_error('ERROR!', 'Exception: ' + str(NameError))
+        except Exception as exception:
+            sg.popup_error('ERROR!', 'Exception: ' + exception.__class__.__name__)
 
     GPIO.cleanup()        
     ServoMotor.stop()
@@ -338,9 +339,9 @@ def UpdateValuesMotionTest(EventData,windowAutomatic):
 
     if(EventData == 'CYCLE_TIME'):
         windowAutomatic['-TXT_MOTION-'].update(background_color = 'white')
-        windowAutomatic['-TXT_CYCLE-'].update(background_color = '#69e345')
+        windowAutomatic['-TXT_NO_MOTION-'].update(background_color = '#69e345')
     elif(EventData == 'MOTION_TIME'):
-        windowAutomatic['-TXT_CYCLE-'].update(background_color = 'white')
+        windowAutomatic['-TXT_NO_MOTION-'].update(background_color = 'white')
         windowAutomatic['-TXT_MOTION-'].update(background_color = '#69e345')
     else:
         windowAutomatic['-TXT_CYCLES_MOTION_TEST-'].update(EventData) 
@@ -396,7 +397,6 @@ def UpdateValuesOpticalTest(EventData,windowAutomatic):
 #-----------------------------------------------------------------------------------------------------
 def StepsDoorTest(DataForTest,windowAutomatic):
     global TestDoor_exit_flag
-
     global DoorTestLog
     Step = 1
     CycleOnProcess = False
@@ -417,8 +417,6 @@ def StepsDoorTest(DataForTest,windowAutomatic):
         actualStep = 0
         InitialTime = time.time()
         while(CycleOnProcess == True):
-            if TestDoor_exit_flag == True:
-                return
             if(Step == 1):
                 if actualStep!=Step:
                     actualStep = Step
@@ -447,10 +445,11 @@ def StepsDoorTest(DataForTest,windowAutomatic):
                 Logtime = ctime()
                 DoorTestLog = DoorTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
-                
-    windowAutomatic.write_event_value('-STARTBTN_DOOR_TEST-','TEST_DONE')
+
     Logtime = ctime()
-    DoorTestLog = DoorTestLog + '\nTest Ended at: ' + Logtime + '\n\n'
+    DoorTestLog = DoorTestLog + '\nTest Ended at: ' + Logtime + '\n\n'            
+    windowAutomatic.write_event_value('-STARTBTN_DOOR_TEST-','TEST_DONE')
+
     return
 
 
@@ -459,10 +458,13 @@ def StepsDoorTest(DataForTest,windowAutomatic):
 #-----------------------------------------------------------------------------------------------------
 def StepsMotionTest(DataForTest,windowAutomatic):
     global TestMotion_exit_flag
+    global MotionTestLog
     Step = 1
     CycleOnProcess = False
     Cycletime = int(DataForTest[0])
     MotionTime = int(DataForTest[1])
+    Logtime = ctime()
+    MotionTestLog = MotionTestLog + 'Test Started at: ' + Logtime + '\n\n'
 
 
     for num in range(1, int(DataForTest[2] + 1), 1): 
@@ -470,6 +472,7 @@ def StepsMotionTest(DataForTest,windowAutomatic):
         windowAutomatic.write_event_value('-UPDATE_VALUES_MOTION_TEST-', CountingString)
         actualStep = 0
         CycleOnProcess = True
+        MotionTestLog = MotionTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
         InitialTime = time.time()
         while(CycleOnProcess == True):
@@ -479,6 +482,8 @@ def StepsMotionTest(DataForTest,windowAutomatic):
 
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    MotionTestLog = MotionTestLog + 'No Motion Time: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_MOTION_TEST-', 'CYCLE_TIME')
                     GPIO.output(RightPresencepin,GPIO.HIGH)
                 ActualTime = time.time()
@@ -488,6 +493,8 @@ def StepsMotionTest(DataForTest,windowAutomatic):
             elif(Step == 2):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    MotionTestLog = MotionTestLog + 'Motion Time: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_MOTION_TEST-', 'MOTION_TIME')
                     GPIO.output(RightPresencepin,GPIO.LOW)
                 ActualTime = time.time()
@@ -498,7 +505,12 @@ def StepsMotionTest(DataForTest,windowAutomatic):
                 CycleOnProcess = False
 
             if TestMotion_exit_flag == True:
+                Logtime = ctime()
+                MotionTestLog = MotionTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
+    
+    Logtime = ctime()
+    MotionTestLog = MotionTestLog + '\nTest Ended at: ' + Logtime + '\n\n' 
     windowAutomatic.write_event_value('-STARTBTN_MOTION_TEST-','TEST_DONE')
     return
 
@@ -509,6 +521,7 @@ def StepsMotionTest(DataForTest,windowAutomatic):
 def StepsOpticalTest(DataForTest,windowAutomatic):
     
     global TestOptical_exit_flag
+    global OpticalTestLog
     Step = 1
     CycleOnProcess = False
     Diference = 0
@@ -521,20 +534,27 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
     Dawntime = int(DataForTest[6])
     DayTime = int(DataForTest[7])
     DuskTime = int(DataForTest[8])
+    Logtime = ctime()
+    OpticalTestLog = OpticalTestLog + 'Test Started at: ' + Logtime + '\n\n'
 
     for num in range(1, int(DataForTest[9] + 1), 1): 
         CountingString = 'Cycles: ' + str(num) + ' of ' +  str(DataForTest[9]) + ' Total'
         windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', CountingString)
         CycleOnProcess = True
+        OpticalTestLog = OpticalTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
         actualStep = 0
         InitialTime = time.time()
         while(CycleOnProcess == True):
             if TestOptical_exit_flag == True:
+                Logtime = ctime()
+                OpticalTestLog = OpticalTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
             if(Step == 1):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Night: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(NightValue)
                 ActualTime = time.time()
@@ -546,6 +566,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     actualStep = Step
                     Diference = DawnValue - NightValue
                     Increace = Diference / ChangeTime
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                 ActualTime = time.time()
                 ValueToWrite = int(((ActualTime - InitialTime) * Increace) + NightValue)
@@ -554,10 +576,14 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     Step = Step + 1
                     InitialTime = time.time()
             if TestOptical_exit_flag == True:
+                Logtime = ctime()
+                OpticalTestLog = OpticalTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
             elif(Step == 3):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Dawn: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DawnValue)
                 ActualTime = time.time()
@@ -569,6 +595,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     actualStep = Step
                     Diference = DayValue - DawnValue
                     Increace = Diference / ChangeTime
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                 ActualTime = time.time()
                 ValueToWrite = int(((ActualTime - InitialTime) * Increace) + DawnValue)
@@ -579,6 +607,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
             elif(Step == 5):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Day: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DayValue)
                 ActualTime = time.time()
@@ -590,6 +620,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     actualStep = Step
                     Diference = DayValue - DuskValue
                     Increace = Diference / ChangeTime
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                 ActualTime = time.time()
                 ValueToWrite =  DayValue - int(((ActualTime - InitialTime) * Increace))
@@ -600,6 +632,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
             elif(Step == 7):
                 if actualStep!=Step:
                     actualStep = Step
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Dusk: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DuskValue)
                 ActualTime = time.time()
@@ -611,6 +645,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     actualStep = Step
                     Diference = DuskValue - NightValue 
                     Increace = Diference / ChangeTime
+                    Logtime = ctime()
+                    OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                 ActualTime = time.time()
                 ValueToWrite =  DuskValue - int(((ActualTime - InitialTime) * Increace))
@@ -621,8 +657,12 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
             elif(Step == 9):
                 CycleOnProcess = False
             if TestOptical_exit_flag == True:
+                Logtime = ctime()
+                OpticalTestLog = OpticalTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
                 return
-
+    
+    Logtime = ctime()
+    OpticalTestLog = OpticalTestLog + '\nTest Ended at: ' + Logtime + '\n\n' 
     windowAutomatic.write_event_value('-STARTBTN_OPTICAL_TEST-',"TEST_DONE")
     return
 
