@@ -53,6 +53,7 @@ DayNightControl.start(0)                        # Initial Day/Night intensity
 
 
 # Base64 code Images
+AppIcon = b'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'
 startbtn = b'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'
 startedbtn = b'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'
 toggle_btn_off = b'iVBORw0KGgoAAAANSUhEUgAAAGQAAAA1CAMAAACA7r40AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP1BMVEX6+vr4+Pj19fX29vbz8/Pv7+/t7e3x8fFzc3N0dHTl5eW1tbVpaWnIyMiEhIR5eXmRkZHY2Njq6uqcnJypqalIAPceAAAESElEQVRYw61YiXarIBBFZEdW/f9vfTOADUSTSs8ba9pYMzf3zsIg4afJq91dm7TimvAHJiX7cjRP3e1w8P4i+cbkPxC6Bal/wCnMHyyXj1Yy8kWGXIhKnpPdfdBaK6WD0jMW4uGMkKe3e7mY5Onw4NvHuO/RI075gRNffzG8F4Bcbu5umMA1kXYV/JGElJQxKrMDyOZe/0oKIfAu5Z3o82GQS5gjhD1JttJm68ok4OIHi4vvLM6/4OaYMMPEAFLfJQ//ZAww1pdRtqa4PRGrAwTRrKixESMTp72TDJwOtgCidGp7IFevnFa7GeVCIsKqaCijhcXyMnzLmAlbi796CqKjkdU1aRhCAkY+aSzLiLIwmv2mJjQrMdyN4KKXy2nAYIixIMY7Dltz3DalpgRTu+jlEiZ4gxDLBaCC0JWiYmoCA09bdCLlVYgY0sJ+dLrAYL6xhFRmckyFkICLbEycsgu70ekHBHOMHptSkykWBRhB1WT2kb/HG4y8xZ9PCVZbABQFJxh94bRjAwapx4hCqds2PVeVQCXLAoJEoD4+kjgVo9JvSk0Vvw5JVrlSsFiDI0YlM+olLcR+Ti518CqXDYa+hYTcRR/SeNsmmWgvKkiMfS8hb0ePMq+X0omjXCYcjN4k14UI1MqBoZ9KMChIBEnaDV3xnkopIubmgoJ2FLmcTmUJ+cCgw6lVrx8rVhpYxOwSEPcB5GNQoFLMrFwYeWCCIH1EqldCzlLsmFCaAWROL4UgPNuQ1xGFFIyb9GICQWYyWGmfr0zO7/9DpY8JMpnrxMAkl8CHNCRw+/6ELO9E/hKTEviSXfKSXeQk1eHA5OK2yWrUehcEV0VtGb3NrkvFU9tiop92YaVsYcJ9hGlxvauQMfTwReJcg8TTFSZy94KtH5gMXWUVaq5BAkww2FYELL6O3fUuMqYWqOXmkqstwAXE+J2+OuQ9EQRhMs4nlxOl4gU/YFa5TnWXgUWm2h7V4zVLKW/qoiWgDwMVunwFoTDC7ttc9sLdFvxjq4efQyX5C0grEj01RQIRkXmVC6ICCUa/gYCWdRyeWuIxIqIxwQQ7ZNuV3I2QOAyzfWIgahW748BdA492aCtZWyDPSXLtZ2Fein1qrtcgVmUiChORo3L0doHEOZ+WaehhXhX/pQ4dP0FKVGCciNqubHlpVuuwbelwgpichRRM2+X7F5BKRQDKnpeyCyqV2U7IbcbyTPK2eMAWGDclfUwAKR+waYRNChv2pYAhXZjL3YJRefBOrvICznBvLIEOxpquZQXguPl93hZbOPZcNlcDE14Pc8BXsEZixkIWMCqN9ecnHyIhj+j4j9uRCf7O5vCQert1Ljlnd9+Gp0cPI1puhQglKDuvPZN20Th8fKP+Yhofytj0456/skv0kjWg5OwfzDmThSxO+InQg9RL5b+y5QHnYsqqFvXBgOBdGMj1rk7MBvzL08Mzaz6i/wMmHoe06O7zzgAAAABJRU5ErkJggg=='
@@ -89,9 +90,14 @@ MotionSenConfig = [
             [sg.Push(),sg.Text('   Motion   '), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-PRESENCE-',border_width=0),sg.Push()],
                 ]
 
+layoutCenter = [[sg.VPush()],
+                [sg.Push(), sg.Text('Centered in the window'), sg.Push()],
+                [sg.Push(), sg.Button('Ok'), sg.Button('Cancel'), sg.Push()],
+                [sg.VPush()]]
+
 layoutManual =  [ #Layout for manual window
-                [sg.Frame('MANUAL TESTING',[[sg.Frame('--Optical Sensor--', sliderconf, element_justification = 'CENTER')],[sg.Frame('--Door State Sensor--',DoorStateConfig,element_justification = 'CENTER'),sg.Frame('--Motion Sensor--',MotionSenConfig,element_justification = 'CENTER',)],
-                [sg.Button(button_text ='Exit Manual Mode',size = (10, 3))]],expand_x = True, expand_y = True, border_width = 5,element_justification = 'left')]
+                [sg.Frame('MANUAL TESTING',[[sg.VPush()],[sg.Frame('--Optical Sensor--', sliderconf, element_justification = 'CENTER')],[sg.Frame('--Door State Sensor--',DoorStateConfig,element_justification = 'CENTER'),sg.Frame('--Motion Sensor--',MotionSenConfig,element_justification = 'CENTER',)],
+                [sg.VPush()],[sg.Push()],[sg.Button(button_text ='Exit Manual Mode',size = (10, 3))]],expand_x = True, expand_y = True, border_width = 5,element_justification = 'CENTER')]
                 ]
 
 
@@ -114,29 +120,29 @@ col2 = [
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('No Motion Time:',key = '-TXT_NO_MOTION-'),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Motion Time: ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Total Cycles:     '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Motion Time:  ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('Total Cycles:      '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
 col3 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_OPTICAL_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_OPTICAL_TEST-')],
-        [sg.Text('Night Level:      ',key = 'NIGHT'),sg.Input(default_text = "",key = '-NIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Dawn Level:      ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Day Level:         ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_GHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Dusk Level:       ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Night Level:     ',key = 'NIGHT'),sg.Input(default_text = "",key = '-NIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Dawn Level:     ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Day Level:        ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_GHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Dusk Level:      ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Rate Change:',key = 'RATE'),sg.Push(),sg.Input(default_text = "",key = '-RATE_CHANGUE_NIGHT_DAY-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_RATE_CHANGE-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Night Time:'),sg.Push(),sg.Input(default_text = "",key = '-NIGHT_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_NIGHT_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Dawn Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAWN_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DAWN_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Day Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAY_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DAY_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Dusk Time:'),sg.Push(),sg.Input(default_text = "",key = '-DUSK_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DUSK_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Total Cycles:      '),sg.Input(default_text = "",key = '-CYCLES_OPTICAL_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Total Cycles:    '),sg.Input(default_text = "",key = '-CYCLES_OPTICAL_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
 layout = [[sg.Frame('Door State Sensor',col1, element_justification='l', size=sizeFrame ), sg.Frame('Motion Sensor',col2, element_justification='l', size=sizeFrame)
           , sg.Frame('Optical Sensor',col3, element_justification='l', size=sizeFrame)],[sg.Button(button_text ='Manual Operation',key = '-MANUAL_MODE-',size = (20, 3)),sg.Button('Save Values', key='-SAVE_PARAMETERS-',border_width=0,size = (20, 3)),sg.Text('Log File'), sg.Button('', image_data = toggle_btn_on_log, key='-LOG_FILE_CREATION-',border_width=0), sg.Push(),sg.Button(button_text ='Exit',size = (10, 3))]]
 
 layoutAutomatic =   [ #layout for Automatic window
-                    [sg.Menu(menu_def_Auto, tearoff=False, pad=(200, 1),font= ('Default', 11))],
+                    [sg.Menu(menu_def_Auto, tearoff=False, pad=(200, 1),font= ('Default', 11), background_color = '#2ea3e6' )],
                     [sg.Frame('AUTOMATIC OPERATION',layout,expand_x = True, expand_y = True, border_width = 5,element_justification = 'C')]
                     ]
 #-----------------------------------------------------------------------------------------------------
@@ -179,7 +185,7 @@ def main():
 
 #Window Initialization    
 
-    windowAutomatic = sg.Window('Door in a Box - Automatic Mode', layoutAutomatic, size=(800, 390), finalize = True,resizable=True, location=(0,0))
+    windowAutomatic = sg.Window('Door in a Box - Automatic Mode', layoutAutomatic, size=(800, 390), finalize = True,resizable=True, location=(0,0),icon = AppIcon )
     windowAutomatic.Maximize()
     windowManual = None
     TestStarted = False
@@ -226,7 +232,7 @@ def main():
 
             elif event == '-MANUAL_MODE-':  #manual mode event execution
                 if windowManual == None:
-                    windowManual = sg.Window('Door in a Box - Manual Mode', layoutManual, size=(800, 390), finalize = True,resizable=True, location=(0,0))
+                    windowManual = sg.Window('Door in a Box - Manual Mode', layoutManual, size=(800, 390), font= ('Default', 12), finalize = True,resizable=True, location=(0,0),icon = AppIcon)
                 ManualOperation(windowManual)
 
             elif event == '-SAVE_PARAMETERS-': #input Data validation and saving parameters to config File 
@@ -428,7 +434,7 @@ def StepsDoorTest(DataForTest,windowAutomatic):
         DoorTestLog = DoorTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
         actualStep = 0
-        InitialTime = time.time()
+        InitialTime = time.perf_counter()
         while(CycleOnProcess == True):
             if(Step == 1):
                 if actualStep!=Step:
@@ -437,10 +443,10 @@ def StepsDoorTest(DataForTest,windowAutomatic):
                     DoorTestLog = DoorTestLog + 'Door Open: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_DOOR_TEST-', 'OPEN')
                     ServoMotor.ChangeDutyCycle(12.5)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if(ActualTime - InitialTime) > TimeOpen:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 2):
                 if actualStep!=Step:
                     actualStep = Step
@@ -448,10 +454,10 @@ def StepsDoorTest(DataForTest,windowAutomatic):
                     DoorTestLog = DoorTestLog + 'Door Closed: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_DOOR_TEST-', 'CLOSED')
                     ServoMotor.ChangeDutyCycle(5)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if((ActualTime - InitialTime) > TimeClosed ):
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 3):
                   CycleOnProcess = False
             if TestDoor_exit_flag == True:
@@ -487,7 +493,7 @@ def StepsMotionTest(DataForTest,windowAutomatic):
         CycleOnProcess = True
         MotionTestLog = MotionTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
-        InitialTime = time.time()
+        InitialTime = time.perf_counter()
         while(CycleOnProcess == True):
             if(Step == 1):
 
@@ -497,10 +503,10 @@ def StepsMotionTest(DataForTest,windowAutomatic):
                     MotionTestLog = MotionTestLog + 'No Motion Time: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_MOTION_TEST-', 'CYCLE_TIME')
                     GPIO.output(RightPresencepin,GPIO.HIGH)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if(ActualTime - InitialTime) >= Cycletime:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 2):
                 if actualStep!=Step:
                     actualStep = Step
@@ -508,10 +514,10 @@ def StepsMotionTest(DataForTest,windowAutomatic):
                     MotionTestLog = MotionTestLog + 'Motion Time: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_MOTION_TEST-', 'MOTION_TIME')
                     GPIO.output(RightPresencepin,GPIO.LOW)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if(ActualTime - InitialTime) >= MotionTime:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 3):
                 CycleOnProcess = False
 
@@ -555,7 +561,7 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
         OpticalTestLog = OpticalTestLog + '>>Cycle: ' + str(num)  + '\n'
         Step = 1
         actualStep = 0
-        InitialTime = time.time()
+        InitialTime = time.perf_counter()
         while(CycleOnProcess == True):
             if TestOptical_exit_flag == True:
                 Logtime = ctime()
@@ -568,10 +574,10 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     OpticalTestLog = OpticalTestLog + 'Night: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(NightValue)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if (ActualTime - InitialTime) >= NightTime:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 2):
                 if actualStep!=Step:
                     actualStep = Step
@@ -580,12 +586,12 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     Logtime = ctime()
                     OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 ValueToWrite = int(((ActualTime - InitialTime) * Increace) + NightValue)
                 DayNightControl.ChangeDutyCycle(ValueToWrite)
                 if ((ActualTime - InitialTime) > ChangeTime or ValueToWrite >= DawnValue):
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             if TestOptical_exit_flag == True:
                 Logtime = ctime()
                 OpticalTestLog = OpticalTestLog + '\nTest Stoped at: ' + Logtime + '\n\n'
@@ -597,10 +603,10 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     OpticalTestLog = OpticalTestLog + 'Dawn: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DawnValue)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if (ActualTime - InitialTime) >= Dawntime:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 4):
                 if actualStep!=Step:
                     actualStep = Step
@@ -609,12 +615,12 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     Logtime = ctime()
                     OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 ValueToWrite = int(((ActualTime - InitialTime) * Increace) + DawnValue)
                 DayNightControl.ChangeDutyCycle(ValueToWrite)
                 if ((ActualTime - InitialTime) > ChangeTime or ValueToWrite >= DayValue):
                     Step = Step + 1
-                    InitialTime = time.time()        
+                    InitialTime = time.perf_counter()        
             elif(Step == 5):
                 if actualStep!=Step:
                     actualStep = Step
@@ -622,10 +628,10 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     OpticalTestLog = OpticalTestLog + 'Day: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DayValue)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if (ActualTime - InitialTime) >= DayTime:
                     Step = Step + 1
-                    InitialTime = time.time()
+                    InitialTime = time.perf_counter()
             elif(Step == 6):
                 if actualStep!=Step:
                     actualStep = Step
@@ -634,12 +640,12 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     Logtime = ctime()
                     OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 ValueToWrite =  DayValue - int(((ActualTime - InitialTime) * Increace))
                 DayNightControl.ChangeDutyCycle(ValueToWrite)
                 if ((ActualTime - InitialTime) > ChangeTime or ValueToWrite <= DuskValue):
                     Step = Step + 1
-                    InitialTime = time.time()   
+                    InitialTime = time.perf_counter()  
             elif(Step == 7):
                 if actualStep!=Step:
                     actualStep = Step
@@ -647,10 +653,10 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     OpticalTestLog = OpticalTestLog + 'Dusk: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
                     DayNightControl.ChangeDutyCycle(DuskValue)
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 if (ActualTime - InitialTime) >= DuskTime:
                     Step = Step + 1
-                    InitialTime = time.time()   
+                    InitialTime = time.perf_counter()   
             elif(Step == 8):
                 if actualStep!=Step:
                     actualStep = Step
@@ -659,12 +665,12 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
                     Logtime = ctime()
                     OpticalTestLog = OpticalTestLog + 'Transition: ' + Logtime  + '\n'
                     windowAutomatic.write_event_value('-UPDATE_VALUES_OPTICAL_TEST-', str(Step))
-                ActualTime = time.time()
+                ActualTime = time.perf_counter()
                 ValueToWrite =  DuskValue - int(((ActualTime - InitialTime) * Increace))
                 DayNightControl.ChangeDutyCycle(ValueToWrite)
                 if ((ActualTime - InitialTime) > ChangeTime or ValueToWrite <= NightValue):
                     Step = Step + 1
-                    InitialTime = time.time()                       
+                    InitialTime = time.perf_counter()                      
             elif(Step == 9):
                 CycleOnProcess = False
             if TestOptical_exit_flag == True:
@@ -898,13 +904,13 @@ def LoadConfigFile(msj):
 
     ConfigFileName = sg.popup_get_file(msj,
     title = 'Configuration',
-    default_path = "/home/masoniteuser/Desktop/DoorInABoox/",
+    default_path = None,
     default_extension = "cfg",
     save_as = False,
     multiple_files = False,
     file_types = (('ALL Files', '.cfg'),),
     no_window = True,
-    size = (60, 25),
+    size = (80, 35),
     button_color = None,
     background_color = None,
     text_color = None,
@@ -918,13 +924,10 @@ def LoadConfigFile(msj):
     initial_folder = None,
     image = None,
     files_delimiter = ";",
-    modal = True,
+    modal = False,
     history = True,
     show_hidden = True,
     history_setting_filename = None)
-    print('file Name')
-    print(ConfigFileName)
-    print('file Name')
     return str(ConfigFileName)
 #-----------------------------------------------------------------------------------------------------
 #--------------------//Load File Parameters Popout//-------------------------------------------------------------
@@ -1085,6 +1088,9 @@ def SaveParameters(fileName,Data):
     
 
         try:
+        #-----------------------Saving logs folder in file config 
+            ConfigReader.set('Logs','folder', str(LogsFolder))
+            
         #-----------------------Door State Sensor Writing Parameters
             ConfigReader.set('Door State Sensor','Time Open',str(Data['-TIME_DOOR_OPEN-']) + ',' + str(Data['-UNITS_DOOR_OPEN-']))
             ConfigReader.set('Door State Sensor','Time Closed',str(Data['-TIME_DOOR_CLOSED-']) + ',' + str(Data['-UNITS_DOOR_CLOSED-']))
