@@ -200,16 +200,16 @@ def main():
                     file = open(LogName, "w")
                     file.write(DoorTestLog + MotionTestLog + OpticalTestLog)
                     file.close()
-                    DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
-                    MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
-                    OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
+                DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
+                MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
+                OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'    
                     
             else:
                 if(disabled == False):
                     disableBtn(True,windowAutomatic)
                     disabled = True
-                    TestStarted = True
                     if LogFileCreation:
+                        TestStarted = True
                         Logtime = ctime()
                         LogtimeName = Logtime.replace(':','_')
                         
@@ -476,8 +476,6 @@ def StepsMotionTest(DataForTest,windowAutomatic):
         Step = 1
         InitialTime = time.time()
         while(CycleOnProcess == True):
-            if TestMotion_exit_flag == True:
-                return
             if(Step == 1):
 
                 if actualStep!=Step:
