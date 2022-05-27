@@ -205,11 +205,13 @@ def main():
                 disabled = False
                 if LogFileCreation and TestStarted:
                     TestStarted = False
+                    Logtime = ctime()
+                    LogtimeName = Logtime.replace(':','_')
                     LogName = LogsFolder + '/' + 'Test' + LogtimeName + ".txt"
                     file = open(LogName, "w")
                     file.write(DoorTestLog + MotionTestLog + OpticalTestLog)
                     file.close()
-                    sg.popup_auto_close('Log Created!: ' + LogName )
+                    sg.popup_auto_close('Log Created! --> ' + LogName )
                 DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
                 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
                 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'    
@@ -220,8 +222,7 @@ def main():
                     disabled = True
                     if LogFileCreation:
                         TestStarted = True
-                        Logtime = ctime()
-                        LogtimeName = Logtime.replace(':','_')
+
                         
 
 
