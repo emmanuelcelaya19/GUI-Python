@@ -10,8 +10,6 @@ from threading import Thread
 import PySimpleGUI as sg # https://pysimplegui.readthedocs.io/en/latest/#license  free source code 
 import RPi.GPIO as GPIO # https://pypi.org/policy/terms-of-use/  free source code 
 import configparser  #Library for config files read / write
-import os #Library for logs creation
-
 
 #-----------------------------------------------------------------------------------------------------
 #--------------------//Global Variables a initial Config Definition//--------------------------------------------------
@@ -29,6 +27,7 @@ TestMotion_exit_flag = False #Variable for control TestMotion Stop execution
 TestOptical_exit_flag = False #Variable for control TestOptical Stop execution
 LogFileCreation = True
 fileName = ''  #config Name
+LogsFolder = ''#folder for savings logs
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
 threads = []                        #Async execution (threads) array
 DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
@@ -74,7 +73,7 @@ toggle_btn_on_log = b'iVBORw0KGgoAAAANSUhEUgAAADwAAAAgCAYAAABO6BuSAAAAAXNSR0IArs
 sg.theme('Reddit')
 sg.SetOptions('global',font= ('Default', 10))
 
-menu_def_Auto = [['& OPEN', ['CONFIG FILE']], # Menu information and options
+menu_def_Auto = [['& CONFIGURATION', ['SELECT CONFIG FILE','SELECT LOGS FOLDER']], # Menu information and options
             ['& INFORMATION', 'ABOUT...'], ]
 
 
@@ -168,6 +167,7 @@ def main():
 
 #global Variables manage
     global fileName
+    global LogsFolder
     global LogFileCreation
     global TestDoor_exit_flag
     global TestMotion_exit_flag
@@ -183,11 +183,14 @@ def main():
     windowAutomatic.Maximize()
     windowManual = None
     TestStarted = False
-    fileName = LoadConfigFile("Select Config File")
-    if fileName!='()':
-        FillParameters(fileName,windowAutomatic)
+
+    fileNameTest = LoadConfigFile("Select Config File")
+    while str(fileNameTest) =='()' or str(fileNameTest) == 'None':
+        sg.popup_ok('Config Selection!', "Please Select a config file before start application!")
+        fileNameTest = LoadConfigFile("Select Config File")
     else:
-        fileName = 'DoorInABoxConfig.cfg'  #config Name
+        fileName = fileNameTest
+        FillParameters(fileName,windowAutomatic)
 
     while True:             # Event Loop
         try:
@@ -196,10 +199,11 @@ def main():
                 disabled = False
                 if LogFileCreation and TestStarted:
                     TestStarted = False
-                    LogName = "/home/masoniteuser/Desktop/DoorInABoox/Logs/Log " + LogtimeName + ".txt"
+                    LogName = LogsFolder + '/' + 'Test' + LogtimeName + ".txt"
                     file = open(LogName, "w")
                     file.write(DoorTestLog + MotionTestLog + OpticalTestLog)
                     file.close()
+                    sg.popup_auto_close('Log Created!: ' + LogName )
                 DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
                 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
                 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'    
@@ -217,15 +221,15 @@ def main():
 
             event, values = windowAutomatic.read(timeout=0) #Window events Reading process / Timeout = 0 for real time window updates
  
-            if event== 'Exit':
+            if event == 'Exit':
                 break
 
-            elif event== '-MANUAL_MODE-':  #manual mode event execution
+            elif event == '-MANUAL_MODE-':  #manual mode event execution
                 if windowManual == None:
                     windowManual = sg.Window('Door in a Box - Manual Mode', layoutManual, size=(800, 390), finalize = True,resizable=True, location=(0,0))
                 ManualOperation(windowManual)
 
-            elif event== '-SAVE_PARAMETERS-': #input Data validation and saving parameters to config File 
+            elif event == '-SAVE_PARAMETERS-': #input Data validation and saving parameters to config File 
                 SaveParameters(fileName,values)
 
             elif event == '-LOG_FILE_CREATION-': #input Data validation and saving parameters to config File
@@ -235,28 +239,37 @@ def main():
                 else:
                     windowAutomatic['-LOG_FILE_CREATION-'].update(image_data=toggle_btn_off_log)
 
-            elif event== 'CONFIG FILE':  #upload config files
-                fileName = LoadConfigFile("Select Config File")
-                if fileName!='()':
+            elif event == 'SELECT CONFIG FILE':  #upload config files
+                fileNameTest = LoadConfigFile("Select Config File")
+                if fileNameTest!='()' and fileNameTest != 'None':
+                    fileName = fileNameTest
                     FillParameters(fileName,windowAutomatic)
 
-            elif event== 'ABOUT...':  #About this application event
+            elif event == 'SELECT LOGS FOLDER':  #Select Folder for savings logs
+                LogsFolderTest = SelectLogsFolder("Select Folder")
+                if LogsFolderTest!='()' and LogsFolderTest != 'None':
+                    LogsFolder = LogsFolderTest
+                    ConfigReader.set('Logs','folder', str(LogsFolder))
+                    with open(fileName, 'w') as configfile:    # save
+                        ConfigReader.write(configfile)
+
+            elif event == 'ABOUT...':  #About this application event
                 about()
 
-            elif event== '-UPDATE_VALUES_DOOR_TEST-':  #update Screen for Door Test (cycles, current test step)
+            elif event == '-UPDATE_VALUES_DOOR_TEST-':  #update Screen for Door Test (cycles, current test step)
                 DoorTestUpdate = Thread( target=UpdateValuesDoorTest, args=(values[event],windowAutomatic), daemon=True)
                 DoorTestUpdate.start()
 
-            elif event== '-UPDATE_VALUES_MOTION_TEST-':   #update Screen for Motion Test (cycles, current test step)
+            elif event == '-UPDATE_VALUES_MOTION_TEST-':   #update Screen for Motion Test (cycles, current test step)
                 MotionTestUpdate = Thread( target=UpdateValuesMotionTest, args=(values[event],windowAutomatic), daemon=True)
                 MotionTestUpdate.start()
 
-            elif event== '-UPDATE_VALUES_OPTICAL_TEST-':    #update Screen for Optical Test (cycles, current test step)
+            elif event == '-UPDATE_VALUES_OPTICAL_TEST-':    #update Screen for Optical Test (cycles, current test step)
                 OpticalTestUpdate = Thread( target=UpdateValuesOpticalTest, args=(values[event],windowAutomatic), daemon=True)
                 OpticalTestUpdate.start()
 
     # ---------------- events for button and start tests-----------------------------------
-            elif event== '-STARTBTN_DOOR_TEST-':   #start / Stop Door Test execution
+            elif event == '-STARTBTN_DOOR_TEST-':   #start / Stop Door Test execution
                 if(not DoorTest):
                     DoorTest,TestDataDoorTest = GetTestValues(event,values) #Input data validation  / ensure correct values for test
                     if(DoorTest):
@@ -271,7 +284,7 @@ def main():
                     windowAutomatic['-TXT_OPEN-'].update(background_color = 'white')
                     DoorTest = False
 
-            elif event== '-STARTBTN_MOTION_TEST-':      #start / Stop Motion Test execution
+            elif event == '-STARTBTN_MOTION_TEST-':      #start / Stop Motion Test execution
                 if(not MotionTest):
                     MotionTest,TestDataMotionTest = GetTestValues(event,values) #Input data validation  / ensure correct values for test
                     if(MotionTest):
@@ -286,7 +299,7 @@ def main():
                     windowAutomatic['-TXT_MOTION-'].update(background_color = 'white')
                     MotionTest = False
             
-            elif event== '-STARTBTN_OPTICAL_TEST-': #start / Stop Optical Test execution
+            elif event == '-STARTBTN_OPTICAL_TEST-': #start / Stop Optical Test execution
                 if(not OpticalTest):
                     OpticalTest,TestDataOpticalTest = GetTestValues(event,values)  #Input data validation  / ensure correct values for test
                     if(OpticalTest):
@@ -870,8 +883,7 @@ def ManualOperation(windowManual):
 #--------------------//About App Popout//-------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------
 def about(): #About Application PopOut
-    sg.popup_ok('about', 'Version 1.0','Masonite',
-    'Dor in a Box', sg.version)
+    sg.popup_ok('Info:','Dor in a Box','Masonite: contacto@masonite.com',sg.version)
     return
 #-----------------------------------------------------------------------------------------------------
 #--------------------//About App Popout//-------------------------------------------------------------
@@ -886,7 +898,7 @@ def LoadConfigFile(msj):
 
     ConfigFileName = sg.popup_get_file(msj,
     title = 'Configuration',
-    default_path = "/home/masoniteuser/Desktop/DoorInABoox/DoorInABoxConfig.cfg",
+    default_path = "/home/masoniteuser/Desktop/DoorInABoox/",
     default_extension = "cfg",
     save_as = False,
     multiple_files = False,
@@ -920,6 +932,32 @@ def LoadConfigFile(msj):
 
 
 
+def SelectLogsFolder(msj):
+    global LogsFolder
+
+    Folder = sg.popup_get_folder(msj,   
+    title = 'Folder',
+    default_path = LogsFolder,
+    no_window = False,
+    size = (None, None),
+    button_color = None,
+    background_color = None,
+    text_color = None,
+    icon = None,
+    font = None,
+    no_titlebar = False,
+    grab_anywhere = True,
+    keep_on_top = True,
+    location = (None, None),
+    relative_location = (None, None),
+    initial_folder = None,
+    image = None,
+    modal = True,
+    history = False,
+    history_setting_filename = None)
+
+    return str(Folder)
+
 
 #-----------------------------------------------------------------------------------------------------
 #--------------------//Fill Parameters on interface//-------------------------------------------------------------
@@ -927,8 +965,12 @@ def LoadConfigFile(msj):
 def FillParameters(fileName,Workingwindow):
     ConfigReader.read(fileName)
     Success = True
+    global LogsFolder
 
     try:
+#-----------------------LogsFolder
+        LogsFolder = ConfigReader['Logs']['folder']
+
 #-----------------------Door Estate Sensor
         Data = (ConfigReader['Door State Sensor']['Time Open']).split(',', 2)
         value = int(Data[0])
