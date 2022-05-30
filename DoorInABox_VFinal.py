@@ -4,6 +4,7 @@
 #Date 5/12/2022
 #Version 1.0
 
+from ast import If
 import time
 from time import ctime, struct_time # library module for Get current Time
 from threading import Thread
@@ -15,6 +16,8 @@ import configparser  #Library for config files read / write
 #--------------------//Global Variables a initial Config Definition//--------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 
+digitalInput1 = 25
+digitalInput2 = 8
 RightPresencepin = 7    #Pin for Led to test right presence
 LeftPresencepin = 11    #Pin for Led to test left presence
 DayNightControlpin = 24 #PWM pGlobal Variables a initial Config Definitionin for control LEDs intensity
@@ -37,6 +40,8 @@ OpticalTestLog = '----------------------Optical Test Status---------------------
 GPIO.setmode(GPIO.BCM) #BCM pin out mode for Raspberry pi (PWM Control)
 GPIO.setwarnings(False) # Disable GPIO Warings (PinOut use/re-use)
 
+GPIO.setup(digitalInput1,GPIO.IN,pull_up_down=GPIO.PUD_UP)
+GPIO.setup(digitalInput2,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 GPIO.setup(RightPresencepin,GPIO.OUT)       #setting pin as Output
 GPIO.setup(LeftPresencepin,GPIO.OUT)        #setting pin as Output
 GPIO.setup(servopin, GPIO.OUT)              #setting pin as Output
@@ -92,7 +97,7 @@ MotionSenConfig = [
             [sg.Push(),sg.Text('   Motion   '), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-PRESENCE-',border_width=0),sg.Push()],
                 ]
 InputsConfig = [
-                    [sg.Image(source = DigitalInOn),sg.Image(source = DigitalInOff)],
+                    [sg.Image(source = DigitalInOff, key = "-DIGITAL_INPUT1_MANUAL-"),sg.Image(source = DigitalInOff, key = "-DIGITAL_INPUT2_MANUAL-")],
                 ]
 
 layoutManual =  [ #Layout for manual window
@@ -139,7 +144,7 @@ col3 = [
         ]
 
 layout = [[sg.Frame('Door State Sensor',col1, element_justification='l', size=sizeFrame ), sg.Frame('Motion Sensor',col2, element_justification='l', size=sizeFrame)
-          , sg.Frame('Optical Sensor',col3, element_justification='l', size=sizeFrame)],[sg.Button(button_text ='Manual Operation',key = '-MANUAL_MODE-',size = (20, 3)),sg.Button('Save Values', key='-SAVE_PARAMETERS-',border_width=0,size = (20, 3)),sg.Text('Log File'), sg.Button('', image_data = toggle_btn_on_log, key='-LOG_FILE_CREATION-',border_width=0),sg.Image(source = DigitalInOn),sg.Image(source = DigitalInOff), sg.Push(),sg.Button(button_text ='Exit',size = (10, 3))]]
+          , sg.Frame('Optical Sensor',col3, element_justification='l', size=sizeFrame)],[sg.Button(button_text ='Manual Operation',key = '-MANUAL_MODE-',size = (20, 3)),sg.Button('Save Values', key='-SAVE_PARAMETERS-',border_width=0,size = (20, 3)),sg.Text('Log File'), sg.Button('', image_data = toggle_btn_on_log, key='-LOG_FILE_CREATION-',border_width=0),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT1-"),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT2-"), sg.Push(),sg.Button(button_text ='Exit',size = (10, 3))]]
 
 layoutAutomatic =   [ #layout for Automatic window
                     [sg.Menu(menu_def_Auto, tearoff=False, pad=(200, 1),font= ('Default', 11), background_color = '#2ea3e6' )],
@@ -223,8 +228,7 @@ def main():
                     if LogFileCreation:
                         TestStarted = True
 
-                        
-
+            CheckIputs(windowAutomatic)          
 
             event, values = windowAutomatic.read(timeout=0) #Window events Reading process / Timeout = 0 for real time window updates
  
@@ -336,6 +340,23 @@ def main():
 #-----------------------------------------------------------------------------------------------------
 
 
+
+
+def CheckIputs(window):
+    global digitalInput1
+    global digitalInput2
+
+    if GPIO.input(digitalInput1):
+        window['-DIGITAL_INPUT1-'].update(source = DigitalInOn)
+    else:
+        window['-DIGITAL_INPUT1-'].update(source = DigitalInOff)
+
+    if GPIO.input(digitalInput2):
+        window['-DIGITAL_INPUT2-'].update(source = DigitalInOn)
+    else:
+        window['-DIGITAL_INPUT2-'].update(source = DigitalInOff)
+
+    return
 
 
 #--------------------//UpdateValuesDoorTest//--------------------------------------------------------------------
@@ -841,7 +862,18 @@ def ManualOperation(windowManual):
 
     while True:
 
-        event, values = windowManual.read()
+        event, values = windowManual.read(timeout = 0)
+
+        if GPIO.input(digitalInput1):
+            windowManual['-DIGITAL_INPUT1_MANUAL-'].update(source = DigitalInOn)
+        else:
+            windowManual['-DIGITAL_INPUT1_MANUAL-'].update(source = DigitalInOff)
+
+        if GPIO.input(digitalInput2):
+            windowManual['-DIGITAL_INPUT2_MANUAL-'].update(source = DigitalInOn)
+        else:
+            windowManual['-DIGITAL_INPUT2_MANUAL-'].update(source = DigitalInOff)
+
         if event == '-TOGGLE-GRAPHIC-DOOR-':   # if the graphical button that changes images
             graphic_off = not graphic_off
             windowManual['-TOGGLE-GRAPHIC-DOOR-'].update(image_data=toggle_btn_off if graphic_off else toggle_btn_on)
