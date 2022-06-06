@@ -29,6 +29,8 @@ TestDoor_exit_flag = False #Variable for control TestDoor Stop execution
 TestMotion_exit_flag = False #Variable for control TestMotion Stop execution
 TestOptical_exit_flag = False #Variable for control TestOptical Stop execution
 LogFileCreation = True
+DigitalDetected1 = False
+DigitalDetected2 = False
 fileName = ''  #config Name
 LogsFolder = ''#folder for savings logs
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
@@ -36,6 +38,8 @@ threads = []                        #Async execution (threads) array
 DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
+InputsLogs = '---------------------------Inputs Log-----------------------------------------\n------------------------------------------------------------------------------\n\n'
+
 
 GPIO.setmode(GPIO.BCM) #BCM pin out mode for Raspberry pi (PWM Control)
 GPIO.setwarnings(False) # Disable GPIO Warings (PinOut use/re-use)
@@ -186,6 +190,7 @@ def main():
     global DoorTestLog
     global MotionTestLog
     global OpticalTestLog
+    global InputsLogs
 
 
 #Window Initialization    
@@ -214,13 +219,13 @@ def main():
                     LogtimeName = Logtime.replace(':','_')
                     LogName = LogsFolder + '/' + 'Test' + LogtimeName + ".txt"
                     file = open(LogName, "w")
-                    file.write(DoorTestLog + MotionTestLog + OpticalTestLog)
+                    file.write(DoorTestLog + MotionTestLog + OpticalTestLog + InputsLogs)
                     file.close()
                     sg.popup_auto_close('Log Created! --> ' + LogName )
                 DoorTestLog = '----------------------Door Test Status----------------------------------------\n------------------------------------------------------------------------------\n\n'
                 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
                 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'    
-                    
+                InputsLogs = '---------------------------Inputs Log-----------------------------------------\n------------------------------------------------------------------------------\n\n'  
             else:
                 if(disabled == False):
                     disableBtn(True,windowAutomatic)
@@ -345,16 +350,31 @@ def main():
 def CheckIputs(window):
     global digitalInput1
     global digitalInput2
+    global InputsLogs
+    global DigitalDetected1
+    global DigitalDetected2
 
     if GPIO.input(digitalInput1):
-        window['-DIGITAL_INPUT1-'].update(source = DigitalInOn)
-    else:
         window['-DIGITAL_INPUT1-'].update(source = DigitalInOff)
+        DigitalDetected1 = False
+    else:
+        if(DigitalDetected1 == False):
+            DigitalDetected1 = True
+            Logtime = ctime()
+            InputsLogs = InputsLogs + ">> Digital Input 1 Detection " + Logtime + '\n\n'
+        window['-DIGITAL_INPUT1-'].update(source = DigitalInOn)
+        
 
     if GPIO.input(digitalInput2):
-        window['-DIGITAL_INPUT2-'].update(source = DigitalInOn)
-    else:
         window['-DIGITAL_INPUT2-'].update(source = DigitalInOff)
+        DigitalDetected2 = False
+    else:
+        if(DigitalDetected2 == False):
+            DigitalDetected2 = True
+            Logtime = ctime()
+            InputsLogs = InputsLogs + ">> Digital Input 2 Detection " + Logtime + '\n\n'
+        window['-DIGITAL_INPUT2-'].update(source = DigitalInOn)
+        
 
     return
 
@@ -865,14 +885,14 @@ def ManualOperation(windowManual):
         event, values = windowManual.read(timeout = 0)
 
         if GPIO.input(digitalInput1):
-            windowManual['-DIGITAL_INPUT1_MANUAL-'].update(source = DigitalInOn)
-        else:
             windowManual['-DIGITAL_INPUT1_MANUAL-'].update(source = DigitalInOff)
+        else:
+            windowManual['-DIGITAL_INPUT1_MANUAL-'].update(source = DigitalInOn)
 
         if GPIO.input(digitalInput2):
-            windowManual['-DIGITAL_INPUT2_MANUAL-'].update(source = DigitalInOn)
-        else:
             windowManual['-DIGITAL_INPUT2_MANUAL-'].update(source = DigitalInOff)
+        else:
+            windowManual['-DIGITAL_INPUT2_MANUAL-'].update(source = DigitalInOn)
 
         if event == '-TOGGLE-GRAPHIC-DOOR-':   # if the graphical button that changes images
             graphic_off = not graphic_off
