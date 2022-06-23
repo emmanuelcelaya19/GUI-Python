@@ -137,7 +137,7 @@ col3 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_OPTICAL_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_OPTICAL_TEST-')],
         [sg.Text('Night Level:     ',key = 'NIGHT'),sg.Input(default_text = "",key = '-NIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Dawn Level:     ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Day Level:        ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_GHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Day Level:        ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_LIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Dusk Level:      ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Rate Change:',key = 'RATE'),sg.Push(),sg.Input(default_text = "",key = '-RATE_CHANGUE_NIGHT_DAY-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_RATE_CHANGE-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Night Time:'),sg.Push(),sg.Input(default_text = "",key = '-NIGHT_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_NIGHT_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
@@ -515,7 +515,7 @@ def StepsDoorTest(DataForTest,windowAutomatic):
 
 
 
-#--------------------//Motion Test Execution Sequence//--------------------------------------------------------------------
+#--------------------//Motion Test Execution Sequence//-----------------------------------------------
 #-----------------------------------------------------------------------------------------------------
 def StepsMotionTest(DataForTest,windowAutomatic):
     global TestMotion_exit_flag
@@ -575,7 +575,7 @@ def StepsMotionTest(DataForTest,windowAutomatic):
 
 
 
-#--------------------//Optical Test Execution Sequence//--------------------------------------------------------------------
+#--------------------//Optical Test Execution Sequence//----------------------------------------------
 #-----------------------------------------------------------------------------------------------------
 def StepsOpticalTest(DataForTest,windowAutomatic):
     
@@ -726,6 +726,8 @@ def StepsOpticalTest(DataForTest,windowAutomatic):
     return
 
 
+
+# Disable buttons function
 def disableBtn(state,windowAutomatic):
     if state:
         windowAutomatic['-SAVE_PARAMETERS-'].update(disabled = True)
@@ -736,12 +738,20 @@ def disableBtn(state,windowAutomatic):
         windowAutomatic['-SAVE_PARAMETERS-'].update(disabled = False)
         windowAutomatic['-LOG_FILE_CREATION-'].update(disabled = False)
 
+
+# Get and validate input values
 def GetTestValues(Button,Data):
-
-
     DataValues = [] 
 
     for Dato in Data:
+        if(Dato == '-NIGHT_LIGHT_LEVEL-' or '-DAWN_LIGHT_LEVEL-' or '-DAY_LIGHT_LIGHT_LEVEL-' or '-DUSK_LIGHT_LEVEL-'):
+            try:
+                if(int(Data[Dato])>500):
+                    sg.popup_error('ERROR!', 'Error -4: Invalid Input Value',"Input Values must be lower than 0")
+                    return False,None
+            except:
+                sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"Input must be Numeric")
+                return False,None
         Result = Data[Dato]
         DataValues.append(Result)
 
@@ -754,11 +764,11 @@ def GetTestValues(Button,Data):
             if Result !='sec' and Result !='min' and Result !='hrs':
                 try:
                     Result = int(Result)
-                    if(Result<1):
+                    if(Result<=0):
                         sg.popup_error('ERROR!', 'Error -3: Invalid Input Value',"Input Values must be greater than 0")
                         return False,None
                 except:
-                    sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"Input must be Numeric (An exception occurred while Trying to Run Test)")
+                    sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"Input must be Numeric")
                     return False,None
 
 
@@ -1062,7 +1072,7 @@ def FillParameters(fileName,Workingwindow):
 #--------------------------Optical Sensor
         Workingwindow['-NIGHT_LIGHT_LEVEL-'].update(ConfigReader['Optical Sensor']['Night Level'])
         Workingwindow['-DAWN_LIGHT_LEVEL-'].update(ConfigReader['Optical Sensor']['Dawn Level'])
-        Workingwindow['-DAY_GHT_LIGHT_LEVEL-'].update(ConfigReader['Optical Sensor']['Day Level'])
+        Workingwindow['-DAY_LIGHT_LIGHT_LEVEL-'].update(ConfigReader['Optical Sensor']['Day Level'])
         Workingwindow['-DUSK_LIGHT_LEVEL-'].update(ConfigReader['Optical Sensor']['Dusk Level'])
 
         Data = (ConfigReader['Optical Sensor']['Rate Changue']).split(',', 2)
@@ -1159,7 +1169,7 @@ def SaveParameters(fileName,Data):
         #-----------------------Optical Sensor Writing Parameters
             ConfigReader.set('Optical Sensor','Night Level',str(Data['-NIGHT_LIGHT_LEVEL-']))
             ConfigReader.set('Optical Sensor','Dawn Level',str(Data['-DAWN_LIGHT_LEVEL-']))
-            ConfigReader.set('Optical Sensor','Day Level',str(Data['-DAY_GHT_LIGHT_LEVEL-']))
+            ConfigReader.set('Optical Sensor','Day Level',str(Data['-DAY_LIGHT_LIGHT_LEVEL-']))
             ConfigReader.set('Optical Sensor','Dusk Level',str(Data['-DUSK_LIGHT_LEVEL-']))
             ConfigReader.set('Optical Sensor','Rate Changue', str(Data['-RATE_CHANGUE_NIGHT_DAY-']) + ',' + str(Data['-UNITS_RATE_CHANGE-']))
             ConfigReader.set('Optical Sensor','Night Time', str(Data['-NIGHT_CYCLE_TIME-']) + ',' + str(Data['-UNITS_NIGHT_TIME-']))
