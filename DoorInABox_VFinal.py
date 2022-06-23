@@ -16,21 +16,7 @@ import configparser  #Library for config files read / write
 #--------------------//Global Variables a initial Config Definition//--------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 
-digitalInput1 = 25
-digitalInput2 = 8
-RightPresencepin = 7    #Pin for Led to test right presence
-LeftPresencepin = 11    #Pin for Led to test left presence
-DayNightControlpin = 24 #PWM pGlobal Variables a initial Config Definitionin for control LEDs intensity
-servopin = 18           #Pin for servo control
-graphic_off = True      #Variable for graphic button updates
-precenceDoorRight = False #Variable for graphic button updates
-precenceDoorLeft = True   #Variable for graphic button updates
-TestDoor_exit_flag = False #Variable for control TestDoor Stop execution
-TestMotion_exit_flag = False #Variable for control TestMotion Stop execution
-TestOptical_exit_flag = False #Variable for control TestOptical Stop execution
-LogFileCreation = True
-DigitalDetected1 = False
-DigitalDetected2 = False
+digitalInput1 = 2
 fileName = ''  #config Name
 LogsFolder = ''#folder for savings logs
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
