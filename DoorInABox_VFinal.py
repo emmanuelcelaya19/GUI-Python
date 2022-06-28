@@ -97,7 +97,7 @@ layoutManual =  [ #Layout for manual window
 
 
 # Global Variables for Layouts elements information and sizes
-sizeFrame=(310,610)
+sizeFrame=(310,410)
 Combovalues = ['sec','min','hrs']
 sizeCombo = (3, 5)
 sizeInput = (6,10)
@@ -139,7 +139,7 @@ layout = [[sg.Frame('Door State Sensor',col1, element_justification='l', size=si
           , sg.Frame('Optical Sensor',col3, element_justification='l', size=sizeFrame)],[sg.Button(button_text ='Manual Operation',key = '-MANUAL_MODE-',size = (20, 3)),sg.Button('Save Values', key='-SAVE_PARAMETERS-',border_width=0,size = (20, 3)),sg.Text('Log File'), sg.Button('', image_data = toggle_btn_on_log, key='-LOG_FILE_CREATION-',border_width=0),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT1-"),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT2-"), sg.Push(),sg.Button(button_text ='Exit',size = (10, 3))]]
 
 layoutAutomatic =   [ #layout for Automatic window
-                    [sg.Menu(menu_def_Auto, tearoff=False, pad=(300, 1),font= ('Default', 14), background_color = '#2ea3e6' )],
+                    [sg.Menu(menu_def_Auto, tearoff=False, pad=(200, 1),font= ('Default', 11))],
                     [sg.Frame('AUTOMATIC OPERATION',layout,expand_x = True, expand_y = True, border_width = 5,element_justification = 'C')]
                     ]
 #-----------------------------------------------------------------------------------------------------
