@@ -16,8 +16,8 @@ import configparser  #Library for config files read / write
 #--------------------//Global Variables a initial Config Definition//--------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 
-digitalInput1 = 25
-digitalInput2 = 8
+digitalInput1 = 25   # Pin For General Propouse I/O
+digitalInput2 = 8       # Pin For General Propouse I/O
 RightPresencepin = 7    #Pin for Led to test right presence
 LeftPresencepin = 11    #Pin for Led to test left presence
 DayNightControlpin = 24 #PWM pGlobal Variables a initial Config Definitionin for control LEDs intensity
@@ -39,7 +39,6 @@ DoorTestLog = '----------------------Door Test Status---------------------------
 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
 InputsLogs = '---------------------------Inputs Log-----------------------------------------\n------------------------------------------------------------------------------\n\n'
-
 
 GPIO.setmode(GPIO.BCM) #BCM pin out mode for Raspberry pi (PWM Control)
 GPIO.setwarnings(False) # Disable GPIO Warings (PinOut use/re-use)
