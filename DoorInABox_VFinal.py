@@ -82,7 +82,8 @@ toggle_btn_on_log = b'iVBORw0KGgoAAAANSUhEUgAAADwAAAAgCAYAAABO6BuSAAAAAXNSR0IArs
 #--------------------//Layout screens definition//-----------------------------------------------------
 #-----------------------------------------------------------------------------------------------------
 sg.theme('Reddit')
-sg.SetOptions('global',font= ('Default', 13))
+#
+sg.SetOptions('Text',font= ('Default', 14))
 
 menu_def_Auto = [['& CONFIGURATION', ['SELECT CONFIG FILE','SELECT LOGS FOLDER']], # Menu information and options
             ['& INFORMATION', 'ABOUT...'], ]
@@ -91,68 +92,68 @@ menu_def_Auto = [['& CONFIGURATION', ['SELECT CONFIG FILE','SELECT LOGS FOLDER']
 
 
 sliderconf = [
-            [sg.Image(source = nightImage),sg.Push(),sg.Slider((3, 500), size=(42, 42), orientation='h', key='SLIDER',enable_events=True),sg.Push(),sg.Image(source = dayImage)],
+            [sg.Image(source = nightImage),sg.Push(),sg.Slider((3, 500), size=(42, 82), orientation='h', key='SLIDER',font='default 15',enable_events=True),sg.Push(),sg.Image(source = dayImage)],
             ]
 DoorStateConfig= [
-            [sg.Push(),sg.Text('Close / Open'), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-DOOR-',border_width=0),sg.Push()],
+            [sg.Push(),sg.Text('Close / Open',font='default 15'), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-DOOR-',border_width=0),sg.Push()],
                 ]
 MotionSenConfig = [
-            [sg.Push(),sg.Text('   Motion   '), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-PRESENCE-',border_width=0),sg.Push()],
+            [sg.Push(),sg.Text('   Motion   ',font='default 15'), sg.Button('', image_data = toggle_btn_off, key='-TOGGLE-GRAPHIC-PRESENCE-',border_width=0),sg.Push()],
                 ]
 InputsConfig = [
                     [sg.Image(source = DigitalInOff, key = "-DIGITAL_INPUT1_MANUAL-"),sg.Image(source = DigitalInOff, key = "-DIGITAL_INPUT2_MANUAL-")],
                 ]
 
 layoutManual =  [ #Layout for manual window
-                [sg.Frame('MANUAL TESTING',[[sg.VPush()],[sg.Frame('--Optical Sensor--', sliderconf, element_justification = 'CENTER')],[sg.Frame('--Door State Sensor--',DoorStateConfig,element_justification = 'CENTER'),sg.Frame('--Motion Sensor--',MotionSenConfig,element_justification = 'CENTER')],[sg.Frame('--Inputs State--',InputsConfig,element_justification = 'CENTER')],
-                [sg.VPush()],[sg.Push()],[sg.Button(button_text ='Exit Manual Mode',size = (10, 3))]],expand_x = True, expand_y = True, border_width = 5,element_justification = 'CENTER')]
+                [sg.Frame('MANUAL TESTING',[[sg.VPush()],[sg.Frame('--Optical Sensor--', sliderconf, element_justification = 'CENTER',font='default 16'),],[sg.Frame('--Door State Sensor--',DoorStateConfig,element_justification = 'CENTER',font='default 16'),sg.Frame('--Motion Sensor--',MotionSenConfig,element_justification = 'CENTER',font='default 16')],[sg.Frame('--Inputs State--',InputsConfig,element_justification = 'CENTER',font='default 15')],
+                [sg.VPush()],[sg.Push()],[sg.Button(button_text ='Exit Manual Mode',size = (10, 3))]],expand_x = True, expand_y = True, border_width = 5,element_justification = 'CENTER',)]
                 ]
 
 
 # Global Variables for Layouts elements information and sizes
-sizeFrame=(310,410)
+sizeFrame=(315,610)
 Combovalues = ['sec','min','hrs']
 sizeCombo = (3, 5)
-sizeInput = (6,10)
+sizeInput = (5,6)
 col1 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_DOOR_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...', key = '-TXT_CYCLES_DOOR_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('Time Open:',key = '-TXT_OPEN-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_OPEN-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_OPEN-', default_value = 'sec',size = sizeCombo,readonly = True)],
         [sg.Text('Time Closed:',key = '-TXT_CLOSED-'),sg.Push(),sg.Input(default_text = "",key = '-TIME_DOOR_CLOSED-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DOOR_CLOSED-', default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Total Cycles:     '),sg.Input(default_text = "",key = '-CYCLES_DOOR_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Push()],
+        [sg.Text('Total Cycles:       '),sg.Input(default_text = "",key = '-CYCLES_DOOR_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Push()],
         ]
 
 col2 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_MOTION_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_MOTION_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
-        [sg.Text('No-Motion Time:',key = '-TXT_NO_MOTION-'),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
+        [sg.Text('No-Motion Time:',key = '-TXT_NO_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-CYCLE_TIME_MOTION-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_TIME_MOTION-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Motion Time:  ',key = '-TXT_MOTION-'),sg.Push(),sg.Input(default_text = "",key = '-MOTION_SOURCE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_MOTION_SOURCE_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Total Cycles:      '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Total Cycles:       '),sg.Input(default_text = "",key = '-CYCLES_MOTION_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
 col3 = [
         [sg.Button('', image_data = startbtn, key='-STARTBTN_OPTICAL_TEST-',border_width=0,button_color ='#ffffff'),sg.Text('Cycles: Waiting For Start...',key = '-TXT_CYCLES_OPTICAL_TEST-')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
         [sg.Text('-------------------------------------------------------------------------------------------------------')],
-        [sg.Text('Night Level:     ',key = 'NIGHT'),sg.Input(default_text = "",key = '-NIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Dawn Level:     ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Day Level:        ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_LIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
-        [sg.Text('Dusk Level:      ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Night Level:        ',key = 'NIGHT'),sg.Input(default_text = "",key = '-NIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Dawn Level:        ',key = 'DAWN'),sg.Input(default_text = "",key = '-DAWN_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Day Level:           ',key = 'DAY'),sg.Input(default_text = "",key = '-DAY_LIGHT_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Dusk Level:         ',key = 'DUSK'),sg.Input(default_text = "",key = '-DUSK_LIGHT_LEVEL-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         [sg.Text('Rate Change:',key = 'RATE'),sg.Push(),sg.Input(default_text = "",key = '-RATE_CHANGUE_NIGHT_DAY-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_RATE_CHANGE-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Night Time:'),sg.Push(),sg.Input(default_text = "",key = '-NIGHT_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_NIGHT_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Dawn Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAWN_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues,key = '-UNITS_DAWN_TIME-', default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Day Time:'),sg.Push(),sg.Input(default_text = "",key = '-DAY_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DAY_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
         [sg.Text('Dusk Time:'),sg.Push(),sg.Input(default_text = "",key = '-DUSK_CYCLE_TIME-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white'),sg.Combo(Combovalues, key = '-UNITS_DUSK_TIME-',default_value = 'sec',size = sizeCombo, readonly = True)],
-        [sg.Text('Total Cycles:    '),sg.Input(default_text = "",key = '-CYCLES_OPTICAL_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
+        [sg.Text('Total Cycles:       '),sg.Input(default_text = "",key = '-CYCLES_OPTICAL_TEST-', size = sizeInput,disabled = False,justification = 'left',background_color = 'white')],
         ]
 
 layout = [[sg.Frame('Door State Sensor',col1, element_justification='l', size=sizeFrame ), sg.Frame('Motion Sensor',col2, element_justification='l', size=sizeFrame)
           , sg.Frame('Optical Sensor',col3, element_justification='l', size=sizeFrame)],[sg.Button(button_text ='Manual Operation',key = '-MANUAL_MODE-',size = (20, 3)),sg.Button('Save Values', key='-SAVE_PARAMETERS-',border_width=0,size = (20, 3)),sg.Text('Log File'), sg.Button('', image_data = toggle_btn_on_log, key='-LOG_FILE_CREATION-',border_width=0),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT1-"),sg.Image(source = DigitalInOff,key = "-DIGITAL_INPUT2-"), sg.Push(),sg.Button(button_text ='Exit',size = (10, 3))]]
 
 layoutAutomatic =   [ #layout for Automatic window
-                    [sg.Menu(menu_def_Auto, tearoff=False, pad=(200, 1),font= ('Default', 11))],
+                    [sg.Menu(menu_def_Auto, tearoff=False, pad=((100, 100),(100, 105)),font= ('Default', 15))],
                     [sg.Frame('AUTOMATIC OPERATION',layout,expand_x = True, expand_y = True, border_width = 5,element_justification = 'C')]
                     ]
 #-----------------------------------------------------------------------------------------------------
@@ -748,10 +749,10 @@ def GetTestValues(Button,Data):
         if(Dato == '-NIGHT_LIGHT_LEVEL-' or Dato =='-DAWN_LIGHT_LEVEL-' or Dato =='-DAY_LIGHT_LIGHT_LEVEL-' or Dato =='-DUSK_LIGHT_LEVEL-'):
             try:
                 if(int(Data[Dato])>500):
-                    sg.popup_error('ERROR!', 'Error -4: Invalid Input Value',"Input Values must be lower than 0")
+                    sg.popup_error('ERROR!', 'Error -4: Invalid Input Value',"Night,Day,Dusk and Dawn Input Values must be lower than 500")
                     return False,None
             except:
-                sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"Input must be Numeric")
+                sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"All input data must be numeric")
                 return False,None
         Result = Data[Dato]
         DataValues.append(Result)
@@ -766,10 +767,10 @@ def GetTestValues(Button,Data):
                 try:
                     Result = int(Result)
                     if(Result<=0):
-                        sg.popup_error('ERROR!', 'Error -3: Invalid Input Value',"Input Values must be greater than 0")
+                        sg.popup_error('ERROR!', 'Error -3: Invalid Input Value',"All input values must be greater than 0")
                         return False,None
                 except:
-                    sg.popup_error('ERROR!', 'Error -2: Invalid Input Value',"Input must be Numeric")
+                    sg.popup_error('ERROR!', 'Error -2: IInvalid Input Value',"All input data must be numeric")
                     return False,None
 
 
@@ -953,7 +954,7 @@ def ManualOperation(windowManual):
 #--------------------//About App Popout//-------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------
 def about(): #About Application PopOut
-    sg.popup_ok('Info:','Dor in a Box','Masonite: contacto@masonite.com',sg.version)
+    sg.popup_ok('App Information:','Dor in a Box','Masonite: contacto@masonite.com',sg.version)
     return
 #-----------------------------------------------------------------------------------------------------
 #--------------------//About App Popout//-------------------------------------------------------------
@@ -1013,7 +1014,7 @@ def SelectLogsFolder(msj):
     icon = None,
     font = None,
     no_titlebar = False,
-    grab_anywhere = True,
+    grab_anywhere = False,
     keep_on_top = True,
     location = (None, None),
     relative_location = (None, None),
