@@ -1,0 +1,68 @@
+----------------------Door Test Status----------------------------------------
+------------------------------------------------------------------------------
+
+Test Started at: Mon Jun  6 15:41:17 2022
+
+>>Cycle: 1
+Door Open: Mon Jun  6 15:41:17 2022
+Door Closed: Mon Jun  6 15:41:21 2022
+>>Cycle: 2
+Door Open: Mon Jun  6 15:41:25 2022
+Door Closed: Mon Jun  6 15:41:29 2022
+>>Cycle: 3
+Door Open: Mon Jun  6 15:41:32 2022
+Door Closed: Mon Jun  6 15:41:36 2022
+>>Cycle: 4
+Door Open: Mon Jun  6 15:41:39 2022
+Door Closed: Mon Jun  6 15:41:43 2022
+>>Cycle: 5
+Door Open: Mon Jun  6 15:41:47 2022
+Door Closed: Mon Jun  6 15:41:51 2022
+
+Test Ended at: Mon Jun  6 15:41:54 2022
+
+----------------------Motion Test Status--------------------------------------
+------------------------------------------------------------------------------
+
+Test Started at: Mon Jun  6 15:41:19 2022
+
+>>Cycle: 1
+No Motion Time: Mon Jun  6 15:41:19 2022
+Motion Time: Mon Jun  6 15:41:26 2022
+>>Cycle: 2
+No Motion Time: Mon Jun  6 15:41:28 2022
+Motion Time: Mon Jun  6 15:41:35 2022
+>>Cycle: 3
+No Motion Time: Mon Jun  6 15:41:37 2022
+Motion Time: Mon Jun  6 15:41:44 2022
+>>Cycle: 4
+No Motion Time: Mon Jun  6 15:41:47 2022
+Motion Time: Mon Jun  6 15:41:54 2022
+
+Test Ended at: Mon Jun  6 15:41:56 2022
+
+----------------------Optical Test Status-------------------------------------
+------------------------------------------------------------------------------
+
+Test Started at: Mon Jun  6 15:41:20 2022
+
+>>Cycle: 1
+Night: Mon Jun  6 15:41:21 2022
+Transition: Mon Jun  6 15:41:29 2022
+Dawn: Mon Jun  6 15:41:36 2022
+Transition: Mon Jun  6 15:41:42 2022
+Day: Mon Jun  6 15:41:49 2022
+
+Test Stoped at: Mon Jun  6 15:41:56 2022
+
+---------------------------Inputs Log-----------------------------------------
+------------------------------------------------------------------------------
+
+>> Digital Input 1 Detection Mon Jun  6 15:41:34 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:41:41 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:41:45 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:41:51 2022
+
