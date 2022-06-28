@@ -732,7 +732,7 @@ def GetTestValues(Button,Data):
     DataValues = [] 
 
     for Dato in Data:
-        if(Dato == '-NIGHT_LIGHT_LEVEL-' or '-DAWN_LIGHT_LEVEL-' or '-DAY_LIGHT_LIGHT_LEVEL-' or '-DUSK_LIGHT_LEVEL-'):
+        if(Dato == '-NIGHT_LIGHT_LEVEL-' or Dato =='-DAWN_LIGHT_LEVEL-' or Dato =='-DAY_LIGHT_LIGHT_LEVEL-' or Dato =='-DUSK_LIGHT_LEVEL-'):
             try:
                 if(int(Data[Dato])>500):
                     sg.popup_error('ERROR!', 'Error -4: Invalid Input Value',"Input Values must be lower than 0")
