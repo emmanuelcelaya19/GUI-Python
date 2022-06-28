@@ -1,0 +1,97 @@
+----------------------Door Test Status----------------------------------------
+------------------------------------------------------------------------------
+
+Test Started at: Mon Jun  6 15:25:27 2022
+
+>>Cycle: 1
+Door Open: Mon Jun  6 15:25:27 2022
+Door Closed: Mon Jun  6 15:25:31 2022
+>>Cycle: 2
+Door Open: Mon Jun  6 15:25:34 2022
+Door Closed: Mon Jun  6 15:25:38 2022
+>>Cycle: 3
+Door Open: Mon Jun  6 15:25:41 2022
+
+Test Stoped at: Mon Jun  6 15:25:43 2022
+
+----------------------Motion Test Status--------------------------------------
+------------------------------------------------------------------------------
+
+----------------------Optical Test Status-------------------------------------
+------------------------------------------------------------------------------
+
+---------------------------Inputs Log-----------------------------------------
+------------------------------------------------------------------------------
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:32 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:33 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:36 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:36 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:39 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:39 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:39 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:39 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:40 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:41 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:41 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:41 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:41 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:25:41 2022
+

@@ -1,0 +1,56 @@
+----------------------Door Test Status----------------------------------------
+------------------------------------------------------------------------------
+
+----------------------Motion Test Status--------------------------------------
+------------------------------------------------------------------------------
+
+Test Started at: Mon Jun  6 15:29:16 2022
+
+>>Cycle: 1
+No Motion Time: Mon Jun  6 15:29:16 2022
+Motion Time: Mon Jun  6 15:29:23 2022
+>>Cycle: 2
+No Motion Time: Mon Jun  6 15:29:25 2022
+
+Test Stoped at: Mon Jun  6 15:29:26 2022
+
+----------------------Optical Test Status-------------------------------------
+------------------------------------------------------------------------------
+
+---------------------------Inputs Log-----------------------------------------
+------------------------------------------------------------------------------
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:22 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:22 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:23 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:24 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:24 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:24 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:24 2022
+
+>> Digital Input 1 Detection Mon Jun  6 15:29:24 2022
+
