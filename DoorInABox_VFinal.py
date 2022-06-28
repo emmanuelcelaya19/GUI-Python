@@ -16,7 +16,21 @@ import configparser  #Library for config files read / write
 #--------------------//Global Variables a initial Config Definition//--------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 
-digitalInput1 = 2
+digitalInput1 = 25   # Pin For General Propouse I/O
+digitalInput2 = 8       # Pin For General Propouse I/O
+RightPresencepin = 7    #Pin for Led to test right presence
+LeftPresencepin = 11    #Pin for Led to test left presence
+DayNightControlpin = 24 #PWM pGlobal Variables a initial Config Definitionin for control LEDs intensity
+servopin = 18           #Pin for servo control
+graphic_off = True      #Variable for graphic button updates
+precenceDoorRight = False #Variable for graphic button updates
+precenceDoorLeft = True   #Variable for graphic button updates
+TestDoor_exit_flag = False #Variable for control TestDoor Stop execution
+TestMotion_exit_flag = False #Variable for control TestMotion Stop execution
+TestOptical_exit_flag = False #Variable for control TestOptical Stop execution
+LogFileCreation = True
+DigitalDetected1 = False
+DigitalDetected2 = False
 fileName = ''  #config Name
 LogsFolder = ''#folder for savings logs
 ConfigReader = configparser.ConfigParser()  #Read / write config initialization
@@ -25,7 +39,6 @@ DoorTestLog = '----------------------Door Test Status---------------------------
 MotionTestLog = '----------------------Motion Test Status--------------------------------------\n------------------------------------------------------------------------------\n\n'
 OpticalTestLog = '----------------------Optical Test Status-------------------------------------\n------------------------------------------------------------------------------\n\n'
 InputsLogs = '---------------------------Inputs Log-----------------------------------------\n------------------------------------------------------------------------------\n\n'
-
 
 GPIO.setmode(GPIO.BCM) #BCM pin out mode for Raspberry pi (PWM Control)
 GPIO.setwarnings(False) # Disable GPIO Warings (PinOut use/re-use)
