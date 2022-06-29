@@ -969,7 +969,7 @@ def LoadConfigFile(msj):
 
     ConfigFileName = sg.popup_get_file(msj,
     title = 'Configuration',
-    default_path = '/home/masonite/Desktop/Masonite/ConfigFiles',
+    default_path = None,
     default_extension = "cfg",
     save_as = False,
     multiple_files = False,
@@ -986,7 +986,7 @@ def LoadConfigFile(msj):
     keep_on_top = True,
     location = (None, None),
     relative_location = (None, None),
-    initial_folder = None,
+    initial_folder = '/home/masonite/Desktop/Masonite/ConfigFiles/',
     image = None,
     files_delimiter = ";",
     modal = False,
